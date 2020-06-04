@@ -15,5 +15,4 @@ client.on('error', function (error) {
 
 client.select(1)
 
-
 module.exports = { client, redisPrint }

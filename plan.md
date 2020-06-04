@@ -28,22 +28,22 @@
 
 ## 获取所有分类
 
-```/category/all```
+`/category/all`
 
 ## 获取指定分类的所有软件
 
-```/category/{name}```
+`/category/{name}`
 
 ## 获取首屏展示软件
 
-```/default```
+`/default`
 
 目前是打算从数据库里调出前 n 个软件的信息。
 
 ## 获取某个软件的详情
 
-```/{name}```
+`/{name}`
 
 ## 搜索功能
 
-```/search/{word}```
+`/search/{word}`

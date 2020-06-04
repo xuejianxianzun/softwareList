@@ -1,0 +1,8 @@
+/node_modules
+/dist
+*.js
+*.jsx
+*.json
+*.ts
+*.tsx
+*.vue

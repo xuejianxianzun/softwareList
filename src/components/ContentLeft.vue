@@ -5,7 +5,7 @@
         <a href="/" class="text">
           <div class="menuCon">
             <div class="icon">
-              <img src="../assets/rootIcon.png" alt="" />
+              <img src="../assets/rootIcon.png" alt />
             </div>
             <span>主页</span>
           </div>
@@ -16,7 +16,7 @@
           <a href="/" class="text">
             <div class="menuCon">
               <div class="icon">
-                <img src="../assets/rootIcon.png" alt="" />
+                <img src="../assets/rootIcon.png" alt />
               </div>
               <span>主页</span>
             </div>
@@ -30,7 +30,8 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 @Component
-export default class ContentLeft extends Vue {}
+export default class ContentLeft extends Vue {
+}
 </script>
 
 <style lang="less" scoped>
@@ -73,7 +74,7 @@ export default class ContentLeft extends Vue {}
         }
         .icon {
           margin-right: 8px;
-          img{
+          img {
             width: 80%;
           }
         }
