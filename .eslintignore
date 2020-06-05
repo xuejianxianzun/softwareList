@@ -1,2 +1,3 @@
 /node_modules
 /koa/node_modules
+*.md
