@@ -7,7 +7,7 @@ const data = require('./data')
 client.flushdb(() => {
   for (const item of data) {
     // 所有软件名
-    client.sadd('nameList', item.name)
+    client.sadd('softwareList', item.name)
     // 所有分类
     client.sadd('categoryList', item.category)
     // 每个分类包含的软件名

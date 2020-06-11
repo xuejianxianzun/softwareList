@@ -21,7 +21,9 @@ export default class ContentWrap extends Vue {}
 
 <style lang="less" scoped>
 .contentWrap {
+  overflow: hidden;
   display: flex;
   padding: 10px;
+  box-sizing: border-box;
 }
 </style>

@@ -1,11 +1,10 @@
 <template>
   <div id="app">
-    <div class="appWrap">
       <div class="bg"></div>
       <Header></Header>
       <Toolbar></Toolbar>
       <ContentWrap></ContentWrap>
-    </div>
+      <RightMenu></RightMenu>
   </div>
 </template>
 
@@ -14,9 +13,10 @@ import { Component, Vue } from 'vue-property-decorator'
 import Header from './components/Header.vue'
 import Toolbar from './components/Toolbar.vue'
 import ContentWrap from './components/ContentWrap.vue'
+import RightMenu from './components/RightMenu.vue'
 
 @Component({
-  components: { Header, Toolbar, ContentWrap }
+  components: { Header, Toolbar, ContentWrap, RightMenu }
 })
 export default class App extends Vue {}
 </script>
@@ -26,9 +26,9 @@ export default class App extends Vue {}
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-.appWrap {
   position: relative;
+  display: flex;
+  flex-direction: column;
   background-color: #fff;
   box-shadow: 0 0 13px #ccc;
   margin: 10vh auto 0;

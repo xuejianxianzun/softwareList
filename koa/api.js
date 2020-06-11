@@ -4,7 +4,7 @@ const { client, redisPrint } = require('./redis')
 class API {
   static async getNameList () {
     return new Promise((resolve, reject) => {
-      client.smembers('nameList', (err, reply) => {
+      client.smembers('softwareList', (err, reply) => {
         if (err) {
           reject(err)
         } else {
@@ -88,11 +88,11 @@ class API {
 
   static async search (word) {
     return new Promise((resolve, reject) => {
-      this.getNameList().then(async (nameList) => {
+      this.getNameList().then(async (softwareList) => {
         const wordList = word.split(' ') // 如果搜索词以空格分开，则分割为数组
         let searchNo = 0
         const result = []
-        for (const name of nameList) {
+        for (const name of softwareList) {
           const data = await this.getSoftware(name)
           searchNo++
           if (
@@ -102,7 +102,7 @@ class API {
           ) {
             result.push(data)
           }
-          if (searchNo === nameList.length) {
+          if (searchNo === softwareList.length) {
             resolve(result)
           }
         }

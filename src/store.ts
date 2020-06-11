@@ -6,9 +6,14 @@ export default new Vuex.Store({
   state: {
     orgTitle: 'saber 酱的软件清单',
     currTitle: '',
+    backendOrigin: '//localhost:3000',
     categoryList: [
-      { name: 'compress', cn: '压缩软件', icon: '' },
-      { name: 'download', cn: '下载软件', icon: '' }
+      { name: 'compress', cn: '压缩', icon: '/images/categoryIcon/compress.png' },
+      { name: 'download', cn: '下载', icon: '/images/categoryIcon/download.png' },
+      { name: 'video', cn: '视频', icon: '/images/categoryIcon/video.png' },
+      { name: 'music', cn: '音乐', icon: '/images/categoryIcon/music.png' },
+      { name: 'image', cn: '图像', icon: '/images/categoryIcon/image.png' },
+      { name: 'efficiency', cn: '效率', icon: '/images/categoryIcon/efficiency.png' }
     ]
   },
   mutations: {},

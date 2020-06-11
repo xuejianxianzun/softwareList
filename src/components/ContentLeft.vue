@@ -2,7 +2,7 @@
   <div class="contentLeftWrap">
     <div class="menuGroup">
       <div class="menuRoot menuItem active">
-        <a href="/" class="text">
+        <a href="/category/download" class="text">
           <div class="menuCon">
             <div class="icon">
               <img src="../assets/rootIcon.png" alt />
@@ -13,7 +13,7 @@
       </div>
       <ul class="subMenuList">
         <li class="menuItem">
-          <a href="/" class="text">
+          <a href="/category/download" class="text">
             <div class="menuCon">
               <div class="icon">
                 <img src="../assets/rootIcon.png" alt />
@@ -30,8 +30,7 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 @Component
-export default class ContentLeft extends Vue {
-}
+export default class ContentLeft extends Vue {}
 </script>
 
 <style lang="less" scoped>
@@ -39,12 +38,15 @@ export default class ContentLeft extends Vue {
 @activeBG: #cce8ff;
 .contentLeftWrap {
   display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
   padding: 0 10px 0 10px;
-  max-width: 200px;
   font-size: 14px;
-  width: 200px;
+  width: 220px;
+  flex-shrink: 0;
+  overflow: auto;
   .menuGroup {
-    margin: 10px 0 30px;
+    margin: 5px 0 10px;
     width: 100%;
     .menuRoot {
       .menuCon {

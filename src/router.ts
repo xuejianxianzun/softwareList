@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import CategoryList from './components/CategoryList.vue'
+import SoftwareList from './components/SoftwareList.vue'
+import SoftwareDetails from './components/SoftwareDetails.vue'
 Vue.use(VueRouter)
 
 export default new VueRouter({
@@ -12,6 +14,16 @@ export default new VueRouter({
       name: 'index',
       path: '/',
       component: CategoryList
+    },
+    {
+      name: 'category',
+      path: '/category/:name',
+      component: SoftwareList
+    },
+    {
+      name: 'software',
+      path: '/software/:name',
+      component: SoftwareDetails
     }
   ]
 })

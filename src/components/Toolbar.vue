@@ -57,6 +57,7 @@ export default class Toolbar extends Vue {}
 }
 
 .toolBarWrap {
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   font-size: 14px;

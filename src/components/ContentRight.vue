@@ -14,5 +14,7 @@ export default class ContentRight extends Vue {
 <style lang="less" scoped>
 .contentRight {
   display: flex;
+  width: 100%;
+  overflow: auto;
 }
 </style>
