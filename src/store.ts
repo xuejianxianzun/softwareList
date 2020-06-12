@@ -16,7 +16,17 @@ export default new Vuex.Store({
       { name: 'efficiency', cn: '效率', icon: '/images/categoryIcon/efficiency.png' }
     ],
     savedCategoryList: [],
-    currSoftware: {}
+    currSoftware: {},
+    currCategory: '',
+    addressData: {
+      category: {
+        name: '',
+        cn: ''
+      },
+      software: {
+        name: ''
+      }
+    }
   },
   mutations: {},
   actions: {},

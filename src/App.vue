@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-      <div class="bg"></div>
+      <div id="bg" class="bg"></div>
+      <div id="bgWhite" class="bg"></div>
       <Header></Header>
       <Toolbar></Toolbar>
       <ContentWrap></ContentWrap>
@@ -29,7 +30,6 @@ export default class App extends Vue {}
   position: relative;
   display: flex;
   flex-direction: column;
-  background-color: #fff;
   box-shadow: 0 0 13px #ccc;
   margin: 10vh auto 0;
   padding: 0;
@@ -45,9 +45,15 @@ export default class App extends Vue {}
     top: 0;
     width: 100%;
     height: 100%;
-    z-index: -1;
     background-size: cover;
+  }
+  #bg{
+    z-index: -1;
     opacity: 0.5;
+  }
+  #bgWhite{
+    z-index: -2;
+    background-color: #fff;
   }
 }
 body {

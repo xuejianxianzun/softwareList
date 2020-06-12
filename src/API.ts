@@ -31,6 +31,20 @@ class API {
     })
   }
 
+  static search (word: string): Promise<ResponseSoftwareList> {
+    return new Promise((resolve, reject) => {
+      axios.get(store.state.backendOrigin + '/search/' + word)
+        .then(res => {
+          const result = res.data as ResponseSoftwareList
+          if (res.status === 200) {
+            resolve(result)
+          } else {
+            reject(new Error(`Status error: ${res.status}`))
+          }
+        })
+    })
+  }
+
   static getSoftware (name: string): Promise<ResponseSoftware> {
     return new Promise((resolve, reject) => {
       axios.get(store.state.backendOrigin + '/' + name)

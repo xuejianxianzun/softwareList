@@ -1,14 +1,14 @@
 <template>
   <div class="categoryWrap">
     <nav class="list">
-      <a v-for="item in this.categoryList" :key="item.name" :href="'/category/'+item.name" class="listItem">
+      <router-link v-for="item in this.categoryList" :key="item.name" :to="'/category/'+item.name" class="listItem">
         <div class="iconWrap">
           <img :src=item.icon alt="" class="icon">
         </div>
         <div class="textWrap">
           <h2>{{item.cn}}</h2>
         </div>
-      </a>
+      </router-link>
     </nav>
   </div>
 </template>

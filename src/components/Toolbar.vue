@@ -12,15 +12,19 @@
     <div class="addressBar">
       <ul class="nodeList">
         <li class="node rootNode">
-          <a href="/"> </a>
+          <router-link to="/"> </router-link>
         </li>
-        <li class="node" v-show="this.addressData.category.name">
+        <li class="node" v-show="this.$route.name==='search'">
           <i class="el-icon-arrow-right"></i>
-          <a :href="'/category/'+ this.addressData.category.name">{{this.addressData.category.cn}}</a>
+          <router-link :to="'/search/'+ this.$route.params.word"> "{{ this.$route.params.word}}" 的搜索结果</router-link>
         </li>
-        <li class="node" v-show="this.addressData.software.name">
+        <li class="node" v-show="this.$store.state.addressData.category.name">
           <i class="el-icon-arrow-right"></i>
-          <a :href="'/software/'+ this.addressData.software.name">{{this.addressData.software.name}}</a>
+          <router-link :to="'/category/'+ this.$store.state.addressData.category.name">{{this.$store.state.addressData.category.cn}}</router-link>
+        </li>
+        <li class="node" v-show="this.$store.state.addressData.software.name">
+          <i class="el-icon-arrow-right"></i>
+          <router-link :to="'/software/'+ this.$store.state.addressData.software.name">{{this.$store.state.addressData.software.name}}</router-link>
         </li>
       </ul>
       <button class="btn refresh" @click="refresh()">
@@ -29,8 +33,8 @@
     </div>
     <div class="searchBar">
       <i class="el-icon-search"></i>
-      <input type="text" placeholder="请输入搜索内容" />
-      <button class="btn go hidden">
+      <input type="text" placeholder="请输入搜索内容" v-model="searchWord" @keyup.enter="goToSearch()"/>
+      <button class="btn go" :class="{'show':searchWord.length>1,'hidden':searchWord===''}" @click="goToSearch()">
         <i class="el-icon-right"></i>
       </button>
     </div>
@@ -53,9 +57,30 @@ export default class Toolbar extends Vue {
     }
   }
 
+  private searchWord=''
+
   private backDisable = true
   private forwardDisable = true
   private upDisable = true
+
+  private goToSearch () {
+    if (this.searchWord === '') {
+      return false
+    }
+    // 不重复提交相同的搜索字符，因为这可能会导致 history 操作报错
+    if (this.$route.params.word === this.searchWord) {
+      return false
+    }
+    this.$router.push({
+      path: '/search/' + this.searchWord
+    })
+  }
+
+  private clearSearchWord () {
+    if (this.$route.name !== 'search') {
+      this.searchWord = ''
+    }
+  }
 
   private back () {
     this.$router.back()
@@ -74,20 +99,24 @@ export default class Toolbar extends Vue {
         this.$router.push({
           path: '/category/' + category
         })
-      } else {
-        return false
       }
+      return
     }
-    // 分类页主页
+    // 分类页返回主页
     if (path.includes('/category/')) {
       this.$router.push({
         path: '/'
       })
+      return
     }
     // 主页什么也不做
     if (path === '/') {
       return false
     }
+    // 其他未知情况，返回主页
+    this.$router.push({
+      path: '/'
+    })
   }
 
   private refresh () {
@@ -96,34 +125,60 @@ export default class Toolbar extends Vue {
 
   private checkUp () {
     const index = location.pathname === '/'
-    console.log(index)
     this.upDisable = index
   }
 
-  // 因为软件数据同时包含了分类信息，所以从这里获取路径信息
-  @Watch('$store.state.currSoftware', { immediate: true, deep: true })
-  onChangeValue (newVal: SoftwareData) {
-    this.addressData.software.name = newVal.name || ''
-    this.addressData.category.name = newVal.category || ''
-    this.addressData.category.cn = API.getCategoryCN(newVal.category)
+  private checkBack () {
+    const noHistory = history.length === 1
+    this.backDisable = noHistory
+  }
 
-    // 如果没有获取到分类信息，从 url 里尝试获取
-    if (!this.addressData.category.name) {
-      const name = API.getCategoryFromURL()
-      this.addressData.category.name = name
-      this.addressData.category.cn = API.getCategoryCN(name)
+  private checkForward () {
+    const noHistory = history.length === 1
+    this.forwardDisable = noHistory
+  }
+
+  // 监听不到 currSoftware 时从路由里获取路径信息
+  private getAddress (path: string) {
+    if (path.includes('/category/')) {
+      const name = this.$route.params.name
+      this.$store.state.addressData.category.name = name
+      this.$store.state.addressData.category.cn = API.getCategoryCN(name)
+    }
+    if (path === '/') {
+      this.$store.state.addressData.category.name = ''
+      this.$store.state.addressData.category.cn = ''
     }
   }
 
-  created () {
-    this.checkUp()
-    this.$router.afterEach((to, from) => {
-      console.log(this.$route)
-    })
+  // 监听 currSoftware，获取路径信息。因为软件数据同时包含了分类信息
+  @Watch('$store.state.currSoftware', { immediate: true, deep: true })
+  onChangeValue (newVal: SoftwareData) {
+    this.$store.state.addressData.software.name = newVal.name || ''
+    this.$store.state.addressData.category.name = newVal.category || ''
+    this.$store.state.addressData.category.cn = API.getCategoryCN(newVal.category)
+
+    // 如果没有获取到分类信息，从 url 里尝试获取
+    if (!this.$store.state.addressData.category.name) {
+      const name = API.getCategoryFromURL()
+      this.$store.state.addressData.category.name = name
+      this.$store.state.addressData.category.cn = API.getCategoryCN(name)
+    }
   }
 
-  updated () {
+  private init () {
+    this.checkBack()
+    this.checkForward()
     this.checkUp()
+    this.getAddress(this.$route.path)
+    this.clearSearchWord()
+  }
+
+  created () {
+    this.init()
+    this.$router.afterEach((to, from) => {
+      this.init()
+    })
   }
 }
 </script>
@@ -131,14 +186,14 @@ export default class Toolbar extends Vue {
 <style lang="less" scoped>
 @borderColor: #d9d9d9;
 @hoverBG: #e5f3ff;
-@height: 28px;
+@height: 30px;
 @iconSize: 16px;
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 .show {
-  display: flex;
+  display: flex !important;
 }
 
 .toolBarWrap {
@@ -150,6 +205,9 @@ export default class Toolbar extends Vue {
   padding: 0 15px 0 10px;
     button:disabled{
       opacity: .5;
+    }
+    input{
+      background:transparent;
     }
   .btn {
     background: none;
@@ -231,6 +289,7 @@ export default class Toolbar extends Vue {
     box-sizing: border-box;
     border: 1px solid @borderColor;
     align-items: center;
+    position: relative;
     & > * {
       display: flex;
     }
@@ -247,7 +306,10 @@ export default class Toolbar extends Vue {
       font-size: 14px;
     }
     .go {
-      display: none;
+      position: absolute;
+      right: 0;
+      top:0;
+      z-index: 100;
       justify-content: center;
       border-left: 1px solid @borderColor;
     }

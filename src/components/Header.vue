@@ -22,35 +22,35 @@ export default class Header extends Vue {
     }
     // 分类页
     if (path.includes('/category/')) {
-      const pathArray = path.split('/')
-      const name = pathArray[pathArray.length - 1]
+      const name = this.$route.params.name
       this.title = API.getCategoryCN(name)
     }
     // 软件详情页
     if (path.includes('/software/')) {
-      const pathArray = path.split('/')
-      const name = pathArray[pathArray.length - 1]
+      const name = this.$route.params.name
       this.title = decodeURIComponent(name)
     }
   }
 
   created () {
     this.getTitle()
-  }
-
-  updated () {
-    this.getTitle()
+    this.$router.afterEach((to, from) => {
+      this.getTitle()
+    })
   }
 }
 </script>
 
 <style lang="less" scoped>
 header {
-  padding: 18px 0 15px;
+  @height:50px;
+  box-sizing: border-box;
+  min-height: @height;
   text-align: center;
   h1 {
+    line-height: @height;
     margin: 0;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: normal;
   }
 }

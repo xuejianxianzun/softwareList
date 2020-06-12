@@ -10,6 +10,7 @@
         </div>
       </router-link>
     </div>
+      <p class="empty" :class="{'hidden':softwareList.length>0}">搜索结果为空</p>
   </div>
 </template>
 
@@ -18,28 +19,41 @@ import { Vue, Component } from 'vue-property-decorator'
 import API from '../API'
 import { SoftwareData } from '../type.d'
 @Component
-export default class SoftwareList extends Vue {
+export default class Search extends Vue {
   private softwareList: SoftwareData[]=[]
 
   private async getSoftwareList () {
-    const name = this.$route.params.name
-    const res = await API.getSoftwareList(name)
+    const word = this.$route.params.word
+    const res = await API.search(word)
     this.softwareList = res.body.softwareList
   }
 
   async created () {
-    this.$store.state.currCategory = this.$route.params.name
+    this.$store.state.currCategory = ''
     this.getSoftwareList()
+
+    this.$router.afterEach(() => {
+      this.getSoftwareList()
+    })
   }
 }
 </script> +
 <style lang="less" scoped>
 @activeBG: #E5F3FF;
+
+.hidden{
+  display: none;
+}
+.empty{
+  text-align: center;
+  color: #666;
+}
 .softwareWrap {
   width: 100%;
   display: flex;
   flex-direction: column;
   margin-top: 10px;
+  font-size: 14px;
   .list{
   width: 100%;
     display: flex;

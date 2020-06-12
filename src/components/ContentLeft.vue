@@ -1,26 +1,26 @@
 <template>
   <div class="contentLeftWrap">
     <div class="menuGroup">
-      <div class="menuRoot menuItem active">
-        <a href="/" class="text">
+      <div class="menuRoot menuItem" :class="{'active':$store.state.currCategory === ''}">
+        <router-link to="/" class="text">
           <div class="menuCon">
             <div class="icon">
               <img src="../assets/rootIcon.png" alt />
             </div>
             <span>主页</span>
           </div>
-        </a>
+        </router-link>
       </div>
       <ul class="subMenuList">
-        <li v-for="category in this.categoryList" :key="category.name" class="menuItem">
-          <a :href="'/category/'+category.name" class="text">
+        <li v-for="category in this.categoryList" :key="category.name" class="menuItem" :class="{'active':$store.state.currCategory === category.name}">
+          <router-link :to="'/category/'+category.name" class="text">
             <div class="menuCon">
               <div class="icon">
                 <img :src="category.icon" alt />
               </div>
               <span>{{category.cn}}</span>
             </div>
-          </a>
+          </router-link>
         </li>
       </ul>
     </div>
@@ -36,6 +36,16 @@ import API from '../API'
 export default class ContentLeft extends Vue {
 private categoryList: CategoryData[]=[]
 
+private getCurrCategory () {
+  if (this.$route.path === '/') {
+    this.$store.state.currCategory = ''
+  }
+
+  if (this.$route.path.includes('/category/')) {
+    this.$store.state.currCategory = this.$route.params.name
+  }
+}
+
 async created () {
   const res = await API.getAllCategory()
   const list = res.body.categoryList
@@ -44,6 +54,12 @@ async created () {
     return list.includes(val.name)
   })
   this.$store.state.savedCategoryList = this.categoryList
+
+  this.getCurrCategory()
+
+  this.$router.afterEach((to, from) => {
+    this.getCurrCategory()
+  })
 }
 }
 </script>

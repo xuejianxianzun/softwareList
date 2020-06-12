@@ -10,9 +10,9 @@
           />
         </div>
         <div class="infoWrap">
-            <a href=""><h4>{{ this.softwraeData.name }}</h4></a>
+            <router-link :to="'/software/' + this.softwraeData.name"><h4>{{ this.softwraeData.name }}</h4></router-link>
           <p class="category">
-            <a :href="'/category/' + this.softwraeData.category">分类：{{this.categoryCN}}</a>
+            <router-link :to="'/category/' + this.softwraeData.category">分类：{{this.categoryCN}}</router-link>
           </p>
           <p class="url">
             <a :href="this.softwraeData.link" target="_blank" rel="nofollow">{{
@@ -56,6 +56,7 @@ export default class SoftwareDetails extends Vue {
     this.softwraeData = res.body
     this.ready = true
     this.$store.state.currSoftware = this.softwraeData
+    this.$store.state.currCategory = this.softwraeData.category
   }
 
   beforeDestroy () {
