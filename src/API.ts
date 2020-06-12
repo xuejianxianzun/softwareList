@@ -1,6 +1,6 @@
 import axios from 'axios'
 import store from './store'
-import { ResponseCategoryAll, ResponseSoftwareList, ResponseSoftware } from './type.d'
+import { ResponseCategoryAll, ResponseSoftwareList, ResponseSoftware, CategoryData } from './type.d'
 
 class API {
   static getAllCategory (): Promise<ResponseCategoryAll> {
@@ -43,6 +43,29 @@ class API {
           }
         })
     })
+  }
+
+  static getCategoryCN (name: string) {
+    const allList = store.state.categoryList as CategoryData[]
+
+    for (const list of allList) {
+      if (list.name === name) {
+        return list.cn
+      }
+    }
+
+    return ''
+  }
+
+  static getCategoryFromURL () {
+    const path = location.pathname
+    if (path.includes('/category/')) {
+      const array = path.split('/')
+      const name = array[array.length - 1]
+      return name
+    }
+
+    return ''
   }
 }
 

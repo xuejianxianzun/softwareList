@@ -41,6 +41,9 @@ export default class SoftwareList extends Vue {
     display: flex;
     flex-wrap: wrap;
     .listItem{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       box-sizing: border-box;
       margin:5px 5px;
       padding: 10px 10px;

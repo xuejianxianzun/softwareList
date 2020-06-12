@@ -2,7 +2,7 @@
   <div class="contentLeftWrap">
     <div class="menuGroup">
       <div class="menuRoot menuItem active">
-        <a href="/category/download" class="text">
+        <a href="/" class="text">
           <div class="menuCon">
             <div class="icon">
               <img src="../assets/rootIcon.png" alt />
@@ -12,13 +12,13 @@
         </a>
       </div>
       <ul class="subMenuList">
-        <li class="menuItem">
-          <a href="/category/download" class="text">
+        <li v-for="category in this.categoryList" :key="category.name" class="menuItem">
+          <a :href="'/category/'+category.name" class="text">
             <div class="menuCon">
               <div class="icon">
-                <img src="../assets/rootIcon.png" alt />
+                <img :src="category.icon" alt />
               </div>
-              <span>主页</span>
+              <span>{{category.cn}}</span>
             </div>
           </a>
         </li>
@@ -29,8 +29,23 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
+import { CategoryData } from '../type.d'
+import API from '../API'
+
 @Component
-export default class ContentLeft extends Vue {}
+export default class ContentLeft extends Vue {
+private categoryList: CategoryData[]=[]
+
+async created () {
+  const res = await API.getAllCategory()
+  const list = res.body.categoryList
+  const allList = this.$store.state.categoryList as CategoryData[]
+  this.categoryList = allList.filter((val) => {
+    return list.includes(val.name)
+  })
+  this.$store.state.savedCategoryList = this.categoryList
+}
+}
 </script>
 
 <style lang="less" scoped>
@@ -76,6 +91,7 @@ export default class ContentLeft extends Vue {}
         }
         .icon {
           margin-right: 8px;
+          width: 24px;
           img {
             width: 80%;
           }

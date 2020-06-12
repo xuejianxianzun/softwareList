@@ -3,17 +3,25 @@
     <article class="postWrap" v-show="this.ready">
       <header>
         <div class="logoWrap">
-          <img :src='"/images/"+this.softwraeData.icon' alt="" class="logoImage">
+          <img
+            :src="'/images/' + this.softwraeData.icon"
+            alt=""
+            class="logoImage"
+          />
         </div>
         <div class="infoWrap">
-          <h4><a href="">{{this.softwraeData.name}}</a></h4>
-          <p class="category"><a :href='"/category/"+this.softwraeData.category'>下载软件</a></p>
-          <p class="url"><a :href="this.softwraeData.link" target="_blank" rel="nofollow">{{this.softwraeData.link}}</a></p>
+            <a href=""><h4>{{ this.softwraeData.name }}</h4></a>
+          <p class="category">
+            <a :href="'/category/' + this.softwraeData.category">分类：{{this.categoryCN}}</a>
+          </p>
+          <p class="url">
+            <a :href="this.softwraeData.link" target="_blank" rel="nofollow">{{
+              this.softwraeData.link
+            }}</a>
+          </p>
         </div>
       </header>
-      <section class="postBody">
-        {{this.softwraeData.content}}
-      </section>
+      <section class="postBody" v-html="this.softwraeData.content"></section>
     </article>
   </div>
 </template>
@@ -24,7 +32,9 @@ import API from '../API'
 import { SoftwareData } from '../type.d'
 @Component
 export default class SoftwareDetails extends Vue {
-  private softwraeData: SoftwareData ={
+  private MarkdownIt = require('markdown-it')
+  private md = new this.MarkdownIt()
+  private softwraeData: SoftwareData = {
     name: '',
     category: '',
     icon: '',
@@ -34,86 +44,101 @@ export default class SoftwareDetails extends Vue {
 
   private ready = false
 
+  get categoryCN () {
+    return API.getCategoryCN(this.softwraeData.category)
+  }
+
   async created () {
     const pathArray = this.$route.path.split('/')
     const name = pathArray[pathArray.length - 1]
     const res = await API.getSoftware(name)
+    res.body.content = this.md.render(res.body.content)
     this.softwraeData = res.body
     this.ready = true
+    this.$store.state.currSoftware = this.softwraeData
+  }
+
+  beforeDestroy () {
+    this.$store.state.currSoftware = {}
   }
 }
 </script>
 
 <style lang="less" scoped>
-.detailsWrap{
+.detailsWrap {
   width: 100%;
-  .postWrap{
+  .postWrap {
     max-width: 900px;
-    width: 90%;
-    margin:10px auto;
-    img{
+    width: 92%;
+    margin: 10px auto;
+    img {
       max-width: 100%;
     }
-    header{
+    header {
       display: flex;
       border-bottom: 1px solid #ddd;
-      .logoWrap{
+      .logoWrap {
         width: 100px;
         height: 100px;
         display: flex;
         align-items: center;
         justify-content: center;
       }
-      .infoWrap{
+      .infoWrap {
         margin-left: 25px;
-        h4{
+        h4 {
           font-size: 20px;
           font-weight: bold;
-          color: #0081D0;
+          color: #0081d0;
           margin: 0;
           height: 40px;
           line-height: 40px;
-          a{
-          color: #0081D0;
-
+          a {
+            color: #0081d0;
           }
         }
-        p{
+        p {
           height: 24px;
           line-height: 24px;
-        }
-        .category{
-          font-size:14px;
-          a{
+          a {
             color: #666;
-          }
-        }
-        .url{
-          font-size: 12px;
-          a{
-            color:#666;
-            &:hover{
+            &:hover {
               text-decoration: underline;
-              color: #0081D0;
+              color: #29abfb;
             }
           }
         }
+
+        .category {
+          font-size: 14px;
+        }
+        .url {
+          font-size: 14px;
+        }
       }
     }
-    .postBody{
-      margin:30px auto;
+    .postBody {
+      margin: 30px auto;
       font-size: 16px;
       color: #333;
-      p{
-        margin:5px 0;
-        line-height: 1.5;
-        text-indent: 2em;
-      }
-
-        &>p{
-          padding:0 10px;
-        }
     }
+  }
+}
+</style>
+
+<style lang="less">
+.postBody {
+  img {
+    max-width: 100%;
+  }
+  p {
+    margin: 5px 0;
+    line-height: 1.5;
+    // text-indent: 2em;
+  }
+
+  & > p {
+    padding: 0 10px;
   }
 }
 </style>

@@ -14,13 +14,12 @@ export default new Vuex.Store({
       { name: 'music', cn: '音乐', icon: '/images/categoryIcon/music.png' },
       { name: 'image', cn: '图像', icon: '/images/categoryIcon/image.png' },
       { name: 'efficiency', cn: '效率', icon: '/images/categoryIcon/efficiency.png' }
-    ]
+    ],
+    savedCategoryList: [],
+    currSoftware: {}
   },
   mutations: {},
   actions: {},
   getters: {
-    getTitle: (state) => {
-      return state.currTitle || state.orgTitle
-    }
   }
 })

@@ -29,6 +29,7 @@ export default class CategoryList extends Vue {
     this.categoryList = allList.filter((val) => {
       return list.includes(val.name)
     })
+    this.$store.state.savedCategoryList = this.categoryList
   }
 }
 </script>
