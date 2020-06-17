@@ -141,7 +141,7 @@ export default class SoftwareDetails extends Vue {
   }
 
   & > p {
-    padding: 0 10px;
+    padding: 5px 0;
   }
 }
 </style>
