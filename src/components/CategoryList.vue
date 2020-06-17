@@ -35,7 +35,7 @@ export default class CategoryList extends Vue {
 </script>
 
 <style lang="less" scoped>
-@activeBG: #E5F3FF;
+@activeBG: rgba(190,222,255,0.6);
 .categoryWrap {
   width: 100%;
   display: flex;

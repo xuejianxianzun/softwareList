@@ -12,7 +12,10 @@
     <div class="addressBar">
       <ul class="nodeList">
         <li class="node rootNode">
-          <router-link to="/"> </router-link>
+          <router-link to="/">
+          <i class="icon"></i>
+          <span>主页</span>
+          </router-link>
         </li>
         <li class="node" v-show="this.$route.name==='search'">
           <i class="el-icon-arrow-right"></i>
@@ -65,6 +68,8 @@ export default class Toolbar extends Vue {
 
   private goToSearch () {
     if (this.searchWord === '') {
+      // 如果搜索字符为空，返回主页
+      this.$router.push({ path: '/' })
       return false
     }
     // 不重复提交相同的搜索字符，因为这可能会导致 history 操作报错
@@ -174,18 +179,20 @@ export default class Toolbar extends Vue {
     this.clearSearchWord()
   }
 
+  @Watch('$route')
+  change () {
+    this.init()
+  }
+
   created () {
     this.init()
-    this.$router.afterEach((to, from) => {
-      this.init()
-    })
   }
 }
 </script>
 
 <style lang="less" scoped>
 @borderColor: #d9d9d9;
-@hoverBG: #e5f3ff;
+@hoverBG: rgba(190,222,255,0.6);
 @height: 30px;
 @iconSize: 16px;
 
@@ -246,7 +253,7 @@ export default class Toolbar extends Vue {
         align-items: center;
         padding-right: 10px;
         i {
-          opacity: 0.6;
+          color: #aaa;
           font-size: @iconSize;
         }
         &:hover {
@@ -265,14 +272,16 @@ export default class Toolbar extends Vue {
           display: none;
         }
         padding: 0;
-        width: 40px;
+        // width: 40px;
         height: 100%;
-        a {
+        .icon{
           background: url('../assets/rootIcon.png') center center no-repeat;
-          background-size: 50%;
+          background-size: 60%;
           display: inline-flex;
-          width: 100%;
-          height: 100%;
+        width: 30px;
+        }
+        a{
+          padding-right: 5px;
         }
       }
     }

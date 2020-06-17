@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
+import { Vue, Component, Watch } from 'vue-property-decorator'
 import API from '../API'
 import { SoftwareData } from '../type.d'
 @Component
@@ -28,18 +28,19 @@ export default class Search extends Vue {
     this.softwareList = res.body.softwareList
   }
 
+  @Watch('$route')
+  change () {
+    this.getSoftwareList()
+  }
+
   async created () {
     this.$store.state.currCategory = ''
     this.getSoftwareList()
-
-    this.$router.afterEach(() => {
-      this.getSoftwareList()
-    })
   }
 }
 </script> +
 <style lang="less" scoped>
-@activeBG: #E5F3FF;
+@activeBG: rgba(190,222,255,0.6);
 
 .hidden{
   display: none;
@@ -76,7 +77,7 @@ export default class Search extends Vue {
         width: 128px;
         display: flex;
         justify-content: center;
-        align-items: flex-end;
+        align-items: center;
         img{
           max-width: 100%;
         }

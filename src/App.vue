@@ -1,11 +1,10 @@
 <template>
   <div id="app">
-      <div id="bg" class="bg"></div>
-      <div id="bgWhite" class="bg"></div>
-      <Header></Header>
-      <Toolbar></Toolbar>
-      <ContentWrap></ContentWrap>
-      <RightMenu></RightMenu>
+    <BG></BG>
+    <Header></Header>
+    <Toolbar></Toolbar>
+    <ContentWrap></ContentWrap>
+    <RightMenu></RightMenu>
   </div>
 </template>
 
@@ -15,9 +14,10 @@ import Header from './components/Header.vue'
 import Toolbar from './components/Toolbar.vue'
 import ContentWrap from './components/ContentWrap.vue'
 import RightMenu from './components/RightMenu.vue'
+import BG from './components/BG.vue'
 
 @Component({
-  components: { Header, Toolbar, ContentWrap, RightMenu }
+  components: { Header, Toolbar, ContentWrap, RightMenu, BG }
 })
 export default class App extends Vue {}
 </script>
@@ -39,22 +39,6 @@ export default class App extends Vue {}
   max-height: 80vh;
   height: 730px;
   color: #000;
-  .bg {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-  }
-  #bg{
-    z-index: -1;
-    opacity: 0.5;
-  }
-  #bgWhite{
-    z-index: -2;
-    background-color: #fff;
-  }
 }
 body {
   overflow-y: hidden;

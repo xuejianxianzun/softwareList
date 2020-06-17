@@ -12,10 +12,10 @@
         <div class="infoWrap">
             <router-link :to="'/software/' + this.softwraeData.name"><h4>{{ this.softwraeData.name }}</h4></router-link>
           <p class="category">
-            <router-link :to="'/category/' + this.softwraeData.category">分类：{{this.categoryCN}}</router-link>
+            分类：<router-link :to="'/category/' + this.softwraeData.category">{{this.categoryCN}}</router-link>
           </p>
           <p class="url">
-            <a :href="this.softwraeData.link" target="_blank" rel="nofollow">{{
+            官网：<a :href="this.softwraeData.link" target="_blank" rel="nofollow">{{
               this.softwraeData.link
             }}</a>
           </p>
@@ -77,10 +77,11 @@ export default class SoftwareDetails extends Vue {
     }
     header {
       display: flex;
-      border-bottom: 1px solid #ddd;
+      padding-bottom: 5px;
+      border-bottom: 1px solid #eee;
       .logoWrap {
-        width: 100px;
-        height: 100px;
+        width: 128px;
+        height: 128px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -101,6 +102,7 @@ export default class SoftwareDetails extends Vue {
         p {
           height: 24px;
           line-height: 24px;
+          color: #666;
           a {
             color: #666;
             &:hover {

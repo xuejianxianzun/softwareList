@@ -66,7 +66,7 @@ async created () {
 
 <style lang="less" scoped>
 @menuHeight: 28px;
-@activeBG: #cce8ff;
+@activeBG: rgba(190,222,255,0.6);
 .contentLeftWrap {
   display: flex;
   flex-wrap: wrap;
@@ -94,7 +94,7 @@ async created () {
         background: @activeBG;
       }
       &:hover {
-        background: #e5f3ff;
+        background: @activeBG;
       }
       .menuCon {
         display: flex;
