@@ -57,7 +57,7 @@ export default class RightMenu extends Vue {
   private menuOffset = [0, 0] // menu 左、上的 offset 值
   private readonly menuMargin = 4 // 因为不想让菜单紧贴 app 边缘，设置了边距。不过只在菜单要超出边界时应用，如果菜单处于正常范围内还要设置边距，那就影响体验了。
   private fullScreen = false
-  private githubURL = ''
+  private githubURL = 'https://github.com/xuejianxianzun/softwareList'
   private bgSelector = '#' + this.$store.state.bgElementID
 
   set showMenuFlag (boolean: boolean) {

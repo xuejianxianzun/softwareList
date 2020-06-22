@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const { client, redisPrint } = require('./redis')
+const { client } = require('./redis')
 const data = require('./data')
 
 // 使用 Set 保存软件名列表、分类列表、每个分类里的软件列表
@@ -20,10 +20,11 @@ client.flushdb(() => {
   }
 })
 
+// 测试数据写入是否成功
 setTimeout(() => {
   client.hgetall('Internet Download Manager', (err, reply) => {
     console.log(err)
     console.log(reply)
-    process.exit()
+    process.exit() // 结束进程
   })
 }, 1000)

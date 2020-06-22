@@ -1,29 +1,74 @@
-# software-list
+# 简介
 
-## Project setup
+这个项目里展示了一些我觉得好用的软件，向大家推荐。这也是一个前端（兼后端？）的简单练习项目。
+
+前端使用 vue-cli。
+
+后端使用 koa 框架，软件数据使用 markdown 编写，使用 redis 数据库储存。
+
+界面上我模仿了 Windows 10 的资源管理器的样式。因为我推荐的都是电脑软件，何不用“电脑”风格明显的界面呢？这样算是相得益彰了。对移动端进行了简单的适配。
+
+这个项目推荐软件的标准是适合广大普通用户使用的，所以我没有列出用途太小众的，以及专业性太强的软件。另外我也没有列出很大众的软件，比如 qq、微信，这些当用户有需要的时候自己就会想到。
+
+这个项目里做了一个自定义右键菜单；另外用户可以选择自己电脑上的图片设置背景图片。没有背景图片的时候是白底黑字，设置背景图片之后文字会变成白色，以便于阅读。建议使用颜色较深的图片作为背景图片。
+
+[查看无背景截图](public/screenshot/2020-06-22_150708.png)
+[查看有背景截图](public/screenshot/2020-06-22_150759.png)
+
+# 前端构建流程
+
+```
+# 安装依赖
+npm install
+
+# 启动热更新
+npm run serve
+
+# 构建项目
+npm run build
+```
+# 后端构建流程
+
+后端文件在 `koa` 文件夹内。
+
+```
+cd koa
+```
+
+### 安装依赖
 
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### 导入数据到数据库
+
+首先配置 redis 数据库信息 `redis.js`，然后
 
 ```
-npm run serve
+node initDB.js
 ```
 
-### Compiles and minifies for production
+### 启动后端 web 服务器
 
 ```
-npm run build
+node index.js
 ```
 
-### Lints and fixes files
+# 配置文件
 
-```
-npm run lint
-```
+### 配置 redis 数据库信息
 
-### Customize configuration
+编辑 `koa/redis.js`
 
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### 编辑软件数据
+
+编辑 `koa/data.js`
+
+### 编辑软件的分类
+
+软件的分类由前后端共同约定。
+
+后端只保存分类名，如 `video`。前端保存分类的附加信息，如 `video` 的中文名为“视频”，icon 图标为 `video.png`。这样是为了让前端配置和操作更加自由。
+
+后端部分，软件数据保存在 `koa/data.js` 里，`category` 字段是软件的分类；分类的附加信息则保存在前端 `src/store.ts` 的 `categoryList` 字段里。

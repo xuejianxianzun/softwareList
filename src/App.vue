@@ -31,12 +31,12 @@ export default class App extends Vue {}
   display: flex;
   flex-direction: column;
   box-shadow: 0 0 13px #ccc;
-  margin: 10vh auto 0;
+  margin: 7vh auto 0;
   padding: 0;
   overflow: hidden;
   max-width: 1200px;
   width: 96vw;
-  max-height: 80vh;
+  max-height: 86vh;
   height: 730px;
   color: #000;
 }
@@ -49,5 +49,16 @@ a {
 }
 li {
   list-style: none;
+}
+
+@media
+screen and (max-width:480px){
+  #app{
+    width: 100%;
+    height: 100vh;
+    max-height: 100vh;
+    margin: 0;
+    padding: 0;
+  }
 }
 </style>

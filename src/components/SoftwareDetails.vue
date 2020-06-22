@@ -114,6 +114,7 @@ export default class SoftwareDetails extends Vue {
 
         .category {
           font-size: 14px;
+          margin-top: 10px;
         }
         .url {
           font-size: 14px;
@@ -142,6 +143,10 @@ export default class SoftwareDetails extends Vue {
 
   & > p {
     padding: 5px 0;
+  }
+
+  p a{
+    text-decoration: underline;
   }
 }
 </style>

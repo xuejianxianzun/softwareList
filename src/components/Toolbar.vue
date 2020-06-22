@@ -325,3 +325,21 @@ export default class Toolbar extends Vue {
   }
 }
 </style>
+
+<style lang="less">
+@media
+screen and (max-width:550px){
+  .searchBar{
+    display: none!important;
+  }
+}
+
+@media
+screen and (max-width:480px){
+  .toolBarWrap {
+    .back,.forward,.up,.refresh{
+    display: none!important;
+  }
+  }
+}
+</style>

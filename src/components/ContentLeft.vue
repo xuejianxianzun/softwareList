@@ -121,3 +121,12 @@ async created () {
   }
 }
 </style>
+
+<style lang="less">
+@media
+screen and (max-width:750px){
+  .contentLeftWrap{
+    display: none!important;
+  }
+}
+</style>

@@ -16,7 +16,10 @@ export default new Vuex.Store({
       { name: 'image', cn: '图像', icon: '/images/categoryIcon/image.png' },
       { name: 'screenshot', cn: '截图', icon: '/images/categoryIcon/screen.png' },
       { name: 'screencap', cn: '录屏', icon: '/images/categoryIcon/screencap.png' },
-      { name: 'efficiency', cn: '效率', icon: '/images/categoryIcon/efficiency.png' }
+      { name: 'efficiency', cn: '效率', icon: '/images/categoryIcon/efficiency.png' },
+      { name: 'systemTool', cn: '系统', icon: '/images/categoryIcon/systemTool.png' },
+      { name: 'extract', cn: '提取', icon: '/images/categoryIcon/extract.png' },
+      { name: 'network', cn: '网络', icon: '/images/categoryIcon/network.png' }
     ],
     savedCategoryList: [],
     currSoftware: {},
