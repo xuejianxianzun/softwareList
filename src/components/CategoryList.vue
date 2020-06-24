@@ -83,3 +83,12 @@ export default class CategoryList extends Vue {
   }
 }
 </style>
+
+<style leng="less">
+@media
+screen and (max-width:459px){
+  .categoryWrap .listItem{
+    width: 100%;
+  }
+}
+</style>
