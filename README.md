@@ -18,7 +18,7 @@
 
 # 前端构建流程
 
-git clone 本项目，然后进入 software-list 目录。
+git clone 本项目，然后进入项目目录。
 
 ```
 # 安装依赖
