@@ -4,9 +4,9 @@
 
 [查看在线演示站点（加载速度可能比较慢）](https://software.pixiv.download/)
 
-[查看无背景截图](public/screenshot/2020-06-22_150708.png)
+[查看无背景截图](screenshot/2020-06-22_150708.png)
 
-[查看有背景截图](public/screenshot/2020-06-22_150759.png)
+[查看有背景截图](screenshot/2020-06-22_150759.png)
 
 前端使用 vue-cli，后端使用 koa 框架，数据库使用 redis。软件数据写在 js 文件里，通过 node-redis 导入到数据库。
 
