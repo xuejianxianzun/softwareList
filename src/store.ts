@@ -6,7 +6,6 @@ export default new Vuex.Store({
   state: {
     orgTitle: 'saber 酱的软件清单',
     currTitle: '',
-    backendOrigin: '//localhost:3000',
     bgElementID: 'bg',
     categoryList: [
       { name: 'compress', cn: '压缩', icon: '/images/categoryIcon/compress.png' },

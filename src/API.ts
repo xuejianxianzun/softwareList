@@ -5,7 +5,7 @@ import { ResponseCategoryAll, ResponseSoftwareList, ResponseSoftware, CategoryDa
 class API {
   static getAllCategory (): Promise<ResponseCategoryAll> {
     return new Promise((resolve, reject) => {
-      axios.get(store.state.backendOrigin + '/category/all')
+      axios.get('/category/all')
         .then(res => {
           const result = res.data as ResponseCategoryAll
           if (res.status === 200) {
@@ -19,7 +19,7 @@ class API {
 
   static getSoftwareList (category: string): Promise<ResponseSoftwareList> {
     return new Promise((resolve, reject) => {
-      axios.get(store.state.backendOrigin + '/category/' + category)
+      axios.get('/category/' + category)
         .then(res => {
           const result = res.data as ResponseSoftwareList
           if (res.status === 200) {
@@ -33,7 +33,7 @@ class API {
 
   static search (word: string): Promise<ResponseSoftwareList> {
     return new Promise((resolve, reject) => {
-      axios.get(store.state.backendOrigin + '/search/' + word)
+      axios.get('/search/' + word)
         .then(res => {
           const result = res.data as ResponseSoftwareList
           if (res.status === 200) {
@@ -47,7 +47,7 @@ class API {
 
   static getSoftware (name: string): Promise<ResponseSoftware> {
     return new Promise((resolve, reject) => {
-      axios.get(store.state.backendOrigin + '/' + name)
+      axios.get('/' + name)
         .then(res => {
           const result = res.data as ResponseSoftware
           if (res.status === 200) {

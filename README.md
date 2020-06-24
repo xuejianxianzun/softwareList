@@ -27,6 +27,7 @@ npm run serve
 # 构建项目
 npm run build
 ```
+
 # 后端构建流程
 
 后端文件在 `koa` 文件夹内。
@@ -57,13 +58,27 @@ node index.js
 
 # 配置文件
 
+以下是一些你可能会需要修改的配置文件。
+
 ### 配置 redis 数据库信息
 
 编辑 `koa/redis.js`
 
 ### 编辑软件数据
 
-编辑 `koa/data.js`
+编辑 `koa/data.js`，然后执行 `koa/initDB.js` 向数据库写入数据。
+
+### 修改 koa 服务的端口
+
+修改 `koa/index/js` 中的端口号：
+
+```
+app.listen(3001)
+```
+
+### 配置 axios 请求的 baseURL
+
+编辑 `.env.development` 和 `.env.production` 中的变量 `VUE_APP_BACKEND_URL` 的值。
 
 ### 编辑软件的分类
 
