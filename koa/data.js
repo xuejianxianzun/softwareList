@@ -862,6 +862,22 @@ ps：想起了当初用狸窝转换器慢悠悠转换 3gp 的日子，那是我�
 
 360 驱动大师出现的比它们晚，但是纯净，无广告不流氓，是 360 为数不多的良心，希望可以保持下去。
 `
+  },
+  {
+    name: 'RightMenuMgr',
+    icon: 'RightMenuMgr-icon.png',
+    link: 'http://drag0n.blogbus.com/',
+    category: 'systemTool',
+    content: `RightMenuMgr 可以对右键菜单进行管理。
+
+![](/images/RightMenuMgr-1.png)
+
+有时候右键菜单越来越长，而且其中一些选项我们可能根本不用，我们可以使用 RightMenuMgr 进行清理。
+
+不过有些菜单项是系统自带的，或者其他原因导致无法显示和清理。
+
+注意：它的官网已经打不开了，请大家自行搜索下载链接吧。
+`
   }
 ]
 
